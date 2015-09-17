@@ -1,7 +1,7 @@
 {
   "name": "envirs-react-native-cli",
   "description": "A react native command tool build by Envirs Team.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": {
     "name": "Spikef",
     "email": "Spikef@Foxmail.com"

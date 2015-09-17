@@ -40,3 +40,21 @@ ernc keygen
 *snapshot:*
 
 ![image](https://github.com/Spikef/envirs-react-native-cli/raw/master/images/keygen.jpg)
+
+### build <Platform>
+
+Build the app package.
+
+> *Platform*
+> + Android: build a android app.
+
+*example:*
+
+```
+cd ~/helloworld
+ernc build Android
+```
+
+## Known issue
+
+If you generate the key two or more times for the same app, the keygen command won't update the build.gradle file. I'll fix it in the future.

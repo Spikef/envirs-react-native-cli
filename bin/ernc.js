@@ -89,9 +89,7 @@ program
                     {keyAlias: keyAlias, keyFile: keyFile, keyName: keyName, password: password}
                 );
 
-                console.log('Run the next steps to package apk file yourself -->');
-                console.log('cd %s', path.resolve(root, 'android/app'));
-                console.log('../gradlew assembleRelease')
+                console.log('Successfully generated your key, now try [ernc build Android] to release the apk.');
             }
         });
     });
@@ -140,6 +138,42 @@ program
         }).on('error', function(e) {
             console.log('Request error: ' + e.message);
         });
+    });
+
+program
+    .command('build <Platform>')
+    .description('build the app package')
+    .action(function(Platform) {
+        if ( !helper.isReactNativeProject() ) {
+            console.log('It seems that you didn\'t run this inside a react-native project.');
+            return;
+        }
+
+        if (Platform.toLowerCase() == 'android') {
+            var root = process.cwd();
+            var work = path.resolve(root, 'android/app');
+            var output = path.resolve(root, 'android/app/build/outputs/apk/app-release.apk');
+            var result = child.spawnSync('../gradlew', ['assembleRelease'], {stdio: 'inherit', cwd: work});
+            if (result.status == 0) {
+                // success
+                console.log('Successfully build the apk, you can find the file here:');
+                console.log(output);
+
+                prompt.multi(
+                    [{
+                        label: 'Would you like to open the folder right now?',
+                        key: 'open', type: 'boolean'
+                    }],
+                    function(options){
+                        if (options.open) {
+                            child.exec('open ' + path.dirname(output));
+                        }
+                    }
+                );
+            }
+        } else {
+            console.log('Only support build android yet.');
+        }
     });
 
 program.parse(process.argv);
