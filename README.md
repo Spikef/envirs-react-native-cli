@@ -10,17 +10,17 @@ npm install envirs-react-native-cli -g
 
 ## Commands
 
-> Note: Begin start any command, you should cd to your react-native project first.**
+> Note: Begin start any command, you should cd to your react-native project first.
 
 ### bundle
 
 Bundle the android js files.  You should run "react-native run-android" first so far.
 
-* Options *
+> *Options*
 
-+ minify: whether to minify the bundle file.
+> + minify: whether to minify the bundle file.
 
-example:
+**example:**
 
 ```javascript
 cd ~/helloworld
