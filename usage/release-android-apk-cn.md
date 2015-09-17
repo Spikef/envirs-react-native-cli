@@ -31,7 +31,7 @@ Android应用必须经过签名才能在未root的真机上安装，该步骤将
 
 ## 参考
 
-安装Android运行环境：http://wiki.jikexueyuan.com/project/react-native/DevelopmentSetupAndroid.html
-React Native Android的配置说明：https://github.com/ggchxx/React-Native-Android-Config
-Mac Android签名生成keystore：http://www.cnblogs.com/liqw/p/4064662.html
+安装Android运行环境：http://wiki.jikexueyuan.com/project/react-native/DevelopmentSetupAndroid.html  
+React Native Android的配置说明：https://github.com/ggchxx/React-Native-Android-Config  
+Mac Android签名生成keystore：http://www.cnblogs.com/liqw/p/4064662.html  
 ernc帮助文档：https://github.com/Spikef/envirs-react-native-cli/blob/master/README.md

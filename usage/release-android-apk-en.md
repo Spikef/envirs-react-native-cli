@@ -1,12 +1,12 @@
-# Release a apk file to install on your device （Mac Only）
+# Release a apk file （Mac Only）
 
-You can use the follow steps to release a apk file easily.
+You can use the follow steps to release a apk file to install on your device easily.
 
 ## Step 1：Run you app on simulate
 
 > 1. Open your android simulate
 > 2. Open the terminal
-> 3. cd *<your project folder>*
+> 3. cd *\<your project folder\>*
 > 4. react-native run-android
 
 ## Step 2：Save the JS bundle to local
@@ -25,7 +25,7 @@ The Android Keystore system lets you store cryptographic keys in a container to 
 
 ## Reference
 
-Android Setup：https://facebook.github.io/react-native/docs/android-setup.html#content
-React Native Android Config：https://github.com/ggchxx/React-Native-Android-Config
-Signing Your App Manually：http://developer.android.com/intl/zh-cn/tools/publishing/app-signing.html#signing-manually
+Android Setup：https://facebook.github.io/react-native/docs/android-setup.html#content  
+React Native Android Config：https://github.com/ggchxx/React-Native-Android-Config  
+Signing Your App Manually：http://developer.android.com/intl/zh-cn/tools/publishing/app-signing.html#signing-manually  
 ernc document：https://github.com/Spikef/envirs-react-native-cli/blob/master/README.md

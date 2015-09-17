@@ -41,12 +41,13 @@ ernc keygen
 
 ![image](https://github.com/Spikef/envirs-react-native-cli/raw/master/images/keygen.jpg)
 
-### build <Platform>
+### build \<Platform\>
 
 Build the app package.
 
 > *Platform*
 > + Android: build a android app.
+> + iOS: build a iOS app, not support yet.
 
 *example:*
 
