@@ -2,10 +2,13 @@
 
 'use strict';
 
+var fs = require('fs');
+var path = require('path');
 var child = require('child_process');
 var helper = require('./helper');
-var program = require('commander');
 var Package = require('../package.json');
+var program = require('commander');
+var prompt = require('cli-prompt');
 
 program
     .version(Package.version);
@@ -17,32 +20,80 @@ program
         if ( !helper.isReactNativeProject() ) {
             console.log('It seems that you didn\'t run this inside a react-native project.');
             return;
-        } else {
-            console.log('Begin to save the android bundle, please wait a seconds.');
         }
 
         // prompt user input key args
+        prompt.multi([
+            {
+                label: 'Input the name of the key (such as: mykey)',
+                key: 'keyName',
+                default: '',
+                validate: function (val) {
+                    if (val.length < 1) {
+                        throw new Error ('key name must be at least 1 characters');
+                    }
+                }
+            },
+            {
+                label: 'Input the alias name of the key (such as: reactnative)',
+                key: 'keyAlias',
+                default: '',
+                validate: function (val) {
+                    if (val.length < 1) {
+                        throw new Error ('key alias name must be at least 1 characters');
+                    }
+                }
+            },
+            {
+                label: 'Input the file name of the key (such as: release-key)',
+                key: 'keyFile',
+                validate: function (val) {
+                    if (val.length < 1){
+                        throw new Error('key file name must be at least 1 characters')
+                    }
+                }
+            },
+            {
+                label: 'Input the password of the key (at least 6 characters)',
+                key: 'password',
+                type: 'password',
+                validate: function (val) {
+                    if (val.length < 6){
+                        throw new Error('password must be at least 6 characters')
+                    }
+                }
+            }
+        ], function(options){
+            var keyAlias = options.keyAlias;
+            var keyName = options.keyName;
+            var keyFile = options.keyFile;
+            var password = options.password;
 
+            var root = process.cwd();
+            var keyPath = path.resolve(root, 'android/app/' + keyFile + '.keystore');
 
-        var keyAlias = 'android';
-        var keyName = 'android';
-        var keyFile = '';
+            var args = [
+                '-genkey', '-v', '-keyalg', 'RSA', '-validity', '20000',
+                '-keystore', keyName +'.keystore',
+                '-alias', keyAlias,
+                '-keystore', keyPath,
+                '-keypass', password,
+                '-storepass', password
+            ];
 
-        var path = require('path');
-        var root = process.cwd();
-        var keyPath = path.resolve(root, 'android/app/' + keyFile + '.keystore');
+            var result = child.spawnSync('keytool', args, {stdio: 'inherit'});
+            if (result.status == 0) {
+                // success
+                helper.setBuildGradle(
+                    path.resolve(root, 'android/app/build.gradle'),
+                    {keyAlias: keyAlias, keyFile: keyFile, keyName: keyName, password: password}
+                );
 
-        var args = [
-            '-genkey', '-v', '-keyalg', 'RSA', '-validity', '20000',
-            '-keystore', keyName +'.keystore',
-            '-alias', keyAlias,
-            '-keystore', keyPath
-        ];
-
-        var result = child.spawnSync('keytool', args, {stdio: 'inherit'});
-        if (result.status == 0) {
-            // success
-        }
+                console.log('Run the next steps to package apk file yourself -->');
+                console.log('cd %s', path.resolve(root, 'android/app'));
+                console.log('../gradlew assembleRelease')
+            }
+        });
     });
 
 program
@@ -69,9 +120,6 @@ program
                     var result = UglifyJS.minify(body, {fromString: true});
                     body = result.code;
                 }
-
-                var fs = require('fs');
-                var path = require('path');
 
                 var root = process.cwd();
                 var project = path.basename(root);

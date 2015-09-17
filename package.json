@@ -1,7 +1,7 @@
 {
   "name": "envirs-react-native-cli",
   "description": "A react native command tool build by Envirs Team.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": {
     "name": "Spikef",
     "email": "Spikef@Foxmail.com"
@@ -22,6 +22,7 @@
     "ernc": "./bin/ernc.js"
   },
   "dependencies": {
+    "cli-prompt": "^0.4.2",
     "commander": "^2.8.1",
     "uglify-js": "^2.4.24"
   },

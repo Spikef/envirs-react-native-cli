@@ -25,3 +25,18 @@ Bundle the android js files.  You should run "react-native run-android" first so
 cd ~/helloworld
 ernc bundle --minify
 ```
+
+### keygen
+
+Generate a private key for android apk.
+
+*example:*
+
+```
+cd ~/helloworld
+ernc keygen
+```
+
+*snapshot*
+
+![image](https://github.com/Spikef/envirs-react-native-cli/raw/master/images/keygen.jpg)
