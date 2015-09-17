@@ -14,14 +14,15 @@ npm install envirs-react-native-cli -g
 
 ### bundle
 
-bundle the android files.
+Bundle the android js files.  You should run "react-native run-android" first so far.
 
 #### Options
 
-+ minify: whether to minify the bundle file
++ minify: whether to minify the bundle file.
 
 example:
 
 ```javascript
+cd ~/helloworld
 ernc bundle --minify
 ```
