@@ -1,0 +1,39 @@
+{
+  "name": "envirs-react-native-cli",
+  "description": "A react native command tool build by Envirs Team.",
+  "version": "0.0.2",
+  "author": {
+    "name": "Spikef",
+    "email": "Spikef@Foxmail.com"
+  },
+  "keywords": [
+    "react-native",
+    "envirs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spikef/envirs-react-native-cli.git"
+  },
+  "files": [
+    "lib",
+    "bin"
+  ],
+  "bin": {
+    "ernc": "./bin/ernc.js"
+  },
+  "dependencies": {
+    "commander": "^2.8.1",
+    "uglify-js": "^2.4.24"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "engine-strict": true,
+  "engines": {
+    "node": ">= 0.12"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
