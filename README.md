@@ -37,6 +37,6 @@ cd ~/helloworld
 ernc keygen
 ```
 
-*snapshot*
+*snapshot:*
 
 ![image](https://github.com/Spikef/envirs-react-native-cli/raw/master/images/keygen.jpg)
