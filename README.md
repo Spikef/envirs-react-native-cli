@@ -4,7 +4,7 @@ A react native command tool build by Envirs Team.
 
 ## Install
 
-```shell
+```
 npm install envirs-react-native-cli -g
 ```
 
@@ -16,12 +16,12 @@ npm install envirs-react-native-cli -g
 
 Bundle the android js files.  You should run "react-native run-android" first so far.
 
-> *Options*
-> + minify: whether to minify the bundle file.
+>> *Options*
+>> + minify: whether to minify the bundle file.
 
 *example:*
 
-```shell
+```
 cd ~/helloworld
 ernc bundle --minify
 ```
