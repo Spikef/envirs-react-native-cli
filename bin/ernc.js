@@ -2,12 +2,48 @@
 
 'use strict';
 
-var exec = require('child_process').execSync;
+var child = require('child_process');
 var helper = require('./helper');
 var program = require('commander');
+var Package = require('../package.json');
 
 program
-    .version('0.0.1');
+    .version(Package.version);
+
+program
+    .command('keygen')
+    .description('generate an android keystore')
+    .action(function() {
+        if ( !helper.isReactNativeProject() ) {
+            console.log('It seems that you didn\'t run this inside a react-native project.');
+            return;
+        } else {
+            console.log('Begin to save the android bundle, please wait a seconds.');
+        }
+
+        // prompt user input key args
+
+
+        var keyAlias = 'android';
+        var keyName = 'android';
+        var keyFile = '';
+
+        var path = require('path');
+        var root = process.cwd();
+        var keyPath = path.resolve(root, 'android/app/' + keyFile + '.keystore');
+
+        var args = [
+            '-genkey', '-v', '-keyalg', 'RSA', '-validity', '20000',
+            '-keystore', keyName +'.keystore',
+            '-alias', keyAlias,
+            '-keystore', keyPath
+        ];
+
+        var result = child.spawnSync('keytool', args, {stdio: 'inherit'});
+        if (result.status == 0) {
+            // success
+        }
+    });
 
 program
     .command('bundle')
