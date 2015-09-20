@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+'use strict';
+
 /***
  * author: Spikef
  * mail: Spikef@foxmail.com
