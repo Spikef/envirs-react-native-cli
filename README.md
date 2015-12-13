@@ -14,16 +14,18 @@ npm install envirs-react-native-cli -g
 
 ### bundle
 
-Bundle the android js files.  You should run "react-native run-android" first so far.
+Bundle the js files, support both ios and android.
 
 > *Options*
 > + minify: whether to minify the bundle file.
+> + dev: whether to use the dev mode.
 
 *example:*
 
 ```
 cd ~/helloworld
-ernc bundle --minify
+ernc bundle ios --minify
+ernc bundle android --minify
 ```
 
 ### keygen
@@ -55,7 +57,3 @@ Build the app package.
 cd ~/helloworld
 ernc build Android
 ```
-
-## Known issue
-
-If you generate the key two or more times for the same app, the keygen command won't update the build.gradle file. I'll fix it in the future.

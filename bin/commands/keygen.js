@@ -71,6 +71,8 @@ module.exports = function() {
         var root = process.cwd();
         var keyPath = path.resolve(root, 'android/app/' + keyFile + '.keystore');
 
+        if ( fs.existsSync(keyPath) ) fs.unlinkSync(keyPath);
+
         var args = [
             '-genkey', '-v', '-keyalg', 'RSA', '-validity', '20000',
             '-keystore', keyName +'.keystore',

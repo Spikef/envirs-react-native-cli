@@ -63,6 +63,7 @@ exports.setBuildGradle = function(file, keys) {
 
     if (fs.existsSync(file)) {
         var content = fs.readFileSync(file, 'utf8');
+
         if (content.indexOf('signingConfigs') === -1) {
             content = content.replace('buildTypes',
     `signingConfigs{
@@ -77,9 +78,18 @@ exports.setBuildGradle = function(file, keys) {
             );
 
             content = content.replace(/(buildTypes[\s\r\n]*\{[^\{]*\{[^}]*)(})/, '$1\tsigningConfig signingConfigs.release\n\t\t$2');
-
-            fs.writeFileSync(file, content, 'utf8');
+        } else {
+            content = content.replace(/(signingConfigs[\s\r\n]*\{[^\{]*\{)[^}]*(})/, '$1' + `
+            storeFile file("${keys.keyFile}.keystore")
+            storePassword "${keys.password}"
+            keyAlias "${keys.keyAlias}"
+            keyPassword "${keys.password}"
+        ` + '$2');
         }
+
+        content = content.replace(/\t/g, '    ');
+
+        fs.writeFileSync(file, content, 'utf8');
     }
 };
 
