@@ -15,44 +15,87 @@ var child = require('child_process');
 var helper = require('../helper');
 var prompt = require('cli-prompt');
 
-module.exports = function(options) {
+module.exports = function(Platform, options) {
     if ( !helper.isReactNativeProject() ) {
         console.log('It seems that you didn\'t run this inside a react-native project.');
         return;
     } else {
-        console.log('Begin to save the android bundle, please wait a seconds.');
+        console.log('Begin to save the js bundle, please wait a seconds.');
     }
 
-    var http = require('http');
-    http.get(helper.bundleServer.android, function(res) {
-        var body = '';  // init body data
-        res.on('data', function(chunk) {
-            body += chunk;
-        });
-        res.on('end', function() {
-            if (options.minify) {
-                var UglifyJS = require('uglify-js');
-                var result = UglifyJS.minify(body, {fromString: true});
-                body = result.code;
-            }
+    var minify = options.minify ? true : false;
+    var develop = options.dev ? true : false;
 
-            var root = process.cwd();
-            var project = path.basename(root);
-            var main = path.resolve(root, 'android/app/src/main/java/com/' + project + '/MainActivity.java');
-            var output = path.resolve(root, helper.bundleLocal.android, helper.getBundleAsset(main));
-            var folder = path.resolve(output, '../');
-            if (!fs.existsSync(folder)) {
-                fs.mkdirSync(folder)
-            }
-            fs.writeFile(output, body, function(err) {
-                if (err) {
-                    console.log('Save error: ' + err)
-                } else {
-                    console.log('Successfully finished.');
+    if (Platform.toLowerCase() == 'android') {
+        let root = process.cwd();
+        let project = path.basename(root);
+        let main = path.resolve(root, 'android/app/src/main/java/com/' + project + '/MainActivity.java');
+        let output = path.resolve(root, helper.bundleLocal.android, helper.getBundleAsset(main));
+        let assets = path.resolve(output, '../');
+
+        if (!fs.existsSync(assets)) {
+            fs.mkdirSync(assets)
+        }
+
+        let args = [
+            'bundle', '--platform', 'android', '--entry-file', 'index.android.js',
+            '--bundle-output', output,
+            '--assets-dest', 'android/app/src/main/res/'
+        ];
+
+        args.push('--minify', minify);
+        args.push('--dev', develop);
+
+        let result = child.spawnSync('react-native', args, {stdio: 'inherit', cwd: root});
+
+        if (result.status == 0) {
+            // success
+            console.log('Successfully save the js bundle, you can find the file here:');
+            console.log(output);
+
+            prompt.multi(
+                [{
+                    label: 'Would you like to open the folder right now?',
+                    key: 'open', type: 'boolean'
+                }],
+                function(options){
+                    if (options.open) {
+                        child.exec('open ' + path.dirname(output));
+                    }
                 }
-            });
-        });
-    }).on('error', function(e) {
-        console.log('Request error: ' + e.message);
-    });
+            );
+        }
+    } else {
+        let root = process.cwd();
+        let output = path.resolve(root, helper.bundleLocal.iOS);
+
+        let args = [
+            'bundle', '--platform', 'ios', '--entry-file', 'index.ios.js',
+            '--bundle-output', output,
+            '--assets-dest', 'android/app/src/main/res/'
+        ];
+
+        args.push('--minify', minify);
+        args.push('--dev', develop);
+
+        let result = child.spawnSync('react-native', args, {stdio: 'inherit', cwd: root});
+
+        if (result.status == 0) {
+            // success
+            console.log('Successfully save the js bundle, you can find the file here:');
+            console.log(output);
+
+            prompt.multi(
+                [{
+                    label: 'Would you like to open the folder right now?',
+                    key: 'open', type: 'boolean'
+                }],
+                function(options){
+                    if (options.open) {
+                        child.exec('open ' + path.dirname(output));
+                    }
+                }
+            );
+        }
+    }
 };
