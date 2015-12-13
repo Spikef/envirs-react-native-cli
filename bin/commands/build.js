@@ -23,9 +23,9 @@ module.exports = function(Platform) {
 
     if (Platform.toLowerCase() == 'android') {
         var root = process.cwd();
-        var work = path.resolve(root, 'android/app');
+        var work = path.resolve(root, 'android');
         var output = path.resolve(root, 'android/app/build/outputs/apk/app-release.apk');
-        var result = child.spawnSync('../gradlew', ['assembleRelease'], {stdio: 'inherit', cwd: work});
+        var result = child.spawnSync('./gradlew', ['assembleRelease'], {stdio: 'inherit', cwd: work});
         if (result.status == 0) {
             // success
             console.log('Successfully build the apk, you can find the file here:');

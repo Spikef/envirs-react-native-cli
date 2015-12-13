@@ -23,7 +23,7 @@ program
     .action(Command.keygen);
 
 program
-    .command('bundle')
+    .command('bundle <Platform>')
     .description('bundle the android files')
     .option('-m, --minify', 'whether to minify the bundle file')
     .action(Command.bundle);
