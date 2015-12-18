@@ -44,7 +44,7 @@ exports.getAndroidPackage = function(xml) {
 // 获取MainActivity.java中定义的JS包文件名
 exports.getBundleAsset = function(java) {
     var fs = require('fs');
-    var value = '';
+    var value = 'index.android.bundle';
 
     if (fs.existsSync(java)) {
         var content = fs.readFileSync(java, 'utf8');

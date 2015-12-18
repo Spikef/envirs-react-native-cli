@@ -28,7 +28,7 @@ module.exports = function(Platform, options) {
 
     if (Platform.toLowerCase() == 'android') {
         let root = process.cwd();
-        let project = path.basename(root);
+        let project = require(path.resolve(root, 'package.json')).name;
         let main = path.resolve(root, 'android/app/src/main/java/com/' + project + '/MainActivity.java');
         let output = path.resolve(root, helper.bundleLocal.android, helper.getBundleAsset(main));
         let assets = path.resolve(output, '../');
