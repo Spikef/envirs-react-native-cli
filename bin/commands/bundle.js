@@ -71,8 +71,7 @@ module.exports = function(Platform, options) {
 
         let args = [
             'bundle', '--platform', 'ios', '--entry-file', 'index.ios.js',
-            '--bundle-output', output,
-            '--assets-dest', 'android/app/src/main/res/'
+            '--bundle-output', output
         ];
 
         args.push('--minify', minify);
