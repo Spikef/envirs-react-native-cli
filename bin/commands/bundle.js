@@ -40,7 +40,8 @@ module.exports = function(Platform, options) {
         let args = [
             'bundle', '--platform', 'android', '--entry-file', 'index.android.js',
             '--bundle-output', output,
-            '--assets-dest', 'android/app/src/main/res/'
+            '--assets-dest', 'android/app/src/main/res/',
+            '--reset-cache', 'true'
         ];
 
         args.push('--minify', minify);
@@ -71,7 +72,8 @@ module.exports = function(Platform, options) {
 
         let args = [
             'bundle', '--platform', 'ios', '--entry-file', 'index.ios.js',
-            '--bundle-output', output
+            '--bundle-output', output,
+            '--reset-cache', 'true'
         ];
 
         args.push('--minify', minify);
