@@ -61,3 +61,7 @@ ernc build Android
 ### name \<Name\>
 
 Set a new display name for app.
+
+### link [Package]
+
+Use rnpm-plugin-link to link native packages to your app. More information to visit: (https://github.com/rnpm/rnpm)

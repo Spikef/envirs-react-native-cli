@@ -38,4 +38,9 @@ program
     .description('set the display name for app')
     .action(Command.name);
 
+program
+    .command('link [PackageName]')
+    .description('Updates your project and links all native dependencies')
+    .action(Command.link);
+
 program.parse(process.argv);
