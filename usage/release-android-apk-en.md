@@ -1,18 +1,13 @@
-# Release a apk file （Mac Only）
+# Release a apk file （Mac Tested Only）
 
 You can use the follow steps to release a apk file to install on your device easily.
 
-## Step 1：Run you app on simulate
-
-> 1. Open your android simulate
-> 2. Open the terminal
-> 3. cd *\<your project folder\>*
-> 4. react-native run-android
-
-## Step 2：Save the JS bundle to local
+## Step 1：Save the JS bundle to local
 
 > 1. npm install envirs-react-native-cli -g
-> 2. ernc bundle --minify
+> 2. Open the terminal
+> 3. cd *\<your project folder\>*
+> 4. ernc bundle android --minify
 
 ## Step 3：Generate a key file
 The Android Keystore system lets you store cryptographic keys in a container to make it more difficult to extract from the device.

@@ -114,6 +114,15 @@ exports.getFiles = function(dir) {
     return fileList;
 };
 
+// 获取程序名称
+exports.getProjectName = function() {
+    var path = require('path');
+    var root = process.cwd();
+    var pkg = require(path.resolve(root, 'package.json'));
+
+    return pkg.name;
+};
+
 // JS包线上地址
 exports.bundleServer = {
     android: 'http://localhost:8081/index.android.bundle',

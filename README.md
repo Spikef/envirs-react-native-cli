@@ -57,3 +57,7 @@ Build the app package.
 cd ~/helloworld
 ernc build Android
 ```
+
+### name \<Name\>
+
+Set a new display name for app.

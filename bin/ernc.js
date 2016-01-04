@@ -33,4 +33,9 @@ program
     .description('build the app package')
     .action(Command.build);
 
+program
+    .command('name <Name>')
+    .description('set the display name for app')
+    .action(Command.name);
+
 program.parse(process.argv);
