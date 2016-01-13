@@ -28,13 +28,24 @@ exports.isReactNativeProject = function() {
 // 获取AndroidManifest.xml中java主程序包的包名
 exports.getAndroidPackage = function(xml) {
     var fs = require('fs');
-    var value = '';
+    var path = require('path');
+    var value = '', name = '';
 
     if (fs.existsSync(xml)) {
         var content = fs.readFileSync(xml, 'utf8');
         if (content) {
-            var matches = content.match(/<manifest[^>]+?package="([^"]+)"/);
-            if (matches) value = matches[1];
+            var matches = content.match(/android:name="\.([^"]+)"/);
+            if (matches) name = matches[1];
+        }
+    }
+
+    var dir = path.resolve(path.dirname(xml), 'java');
+    var files = this.getFiles(dir);
+
+    for (let i=0; i<files.length; i++) {
+        if ( path.basename(files[i], '.java') === name ) {
+            value = files[i];
+            break;
         }
     }
 

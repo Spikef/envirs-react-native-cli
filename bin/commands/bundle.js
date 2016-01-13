@@ -28,8 +28,7 @@ module.exports = function(Platform, options) {
 
     if (Platform.toLowerCase() == 'android') {
         let root = process.cwd();
-        let project = helper.getAndroidPackage(path.resolve(root, 'android/app/src/main/AndroidManifest.xml'));
-        let main = path.resolve(root, 'android/app/src/main/java/com/' + project + '/MainActivity.java');
+        let main = helper.getAndroidPackage(path.resolve(root, 'android/app/src/main/AndroidManifest.xml'));
         let output = path.resolve(root, helper.bundleLocal.android, helper.getBundleAsset(main));
         let assets = path.resolve(output, '../');
 
@@ -89,7 +88,7 @@ module.exports = function(Platform, options) {
             prompt.multi(
                 [{
                     label: 'Would you like to open the folder right now?',
-                    key: 'open', type: 'boolean'
+                    key: 'open', type: 'boolean', default: false
                 }],
                 function(options){
                     if (options.open) {
