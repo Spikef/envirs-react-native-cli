@@ -52,21 +52,27 @@ module.exports = function(Type, options) {
 
     fs.writeFileSync(build, android);
 
-    console.log('Successfully set the version to: \n' + JSON.format(version));
+    console.log('Successfully set the version to: \n' + JSON.format(version.ios));
 };
 
 function parse(type, args, vers) {
     var isVal, isMain, isMinor, isFix, name, code, step;
 
-    isVal = args.value ? true : false;
+    isVal = /^(name )?(\d+)(\.\d+)?(\.\d+)?$/.test(type);
     isMain = args.main ? true : false;
     isFix = args.fix ? true : false;
     isMinor = args.minor || (!isMain && !isFix) ? true : false;
 
     if ( isVal ) {
-        name = code = args.value;
+        if ( type.indexOf('name ') === 0 || type.indexOf('.') > 0 ) {
+            name = type.replace('name ', '');
+            type = 'name';
+        } else {
+            code = type;
+            type = 'code';
+        }
     } else {
-        step = args.plus;
+        step = Number(args.plus) || 1;
         code = parseInt(vers.code) + step;
         name = vers.name;
 
@@ -93,7 +99,7 @@ function parse(type, args, vers) {
         });
     }
 
-    if ( type === 'name' || type === 'all' || !type && name && /^\d+/.test(name) ) {
+    if ( type === 'name' || type === 'all' || !type && name ) {
         vers.name = name;
     }
 

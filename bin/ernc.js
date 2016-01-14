@@ -26,6 +26,7 @@ program
     .command('bundle <Platform>')
     .description('bundle the android files')
     .option('-m, --minify', 'whether to minify the bundle file')
+    .option('-d, --dev', 'whether to minify the bundle file')
     .action(Command.bundle);
 
 program
@@ -41,8 +42,7 @@ program
 program
     .command('versions [Type]')
     .description('update the version name(bundle version short) or version code(bundle version)')
-    .option('-v, --value <code>', 'A user defined version number')
-    .option('-p, --plus [n]', 'An integer argument', parseInt, 1)
+    .option('-p, --plus [n]', 'An integer to plus')
     .option('-m, --main', 'To update the main version number')
     .option('-n, --minor', 'To update the minor version number')
     .option('-f, --fix', 'To update the fix version number')
