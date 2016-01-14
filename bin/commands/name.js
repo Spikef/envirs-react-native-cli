@@ -17,8 +17,6 @@ module.exports = function(name) {
     if ( !helper.isReactNativeProject() ) {
         console.log('It seems that you didn\'t run this inside a react-native project.');
         return;
-    } else {
-        console.log('Begin to save the js bundle, please wait a seconds.');
     }
 
     var root = process.cwd();

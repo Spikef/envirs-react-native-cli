@@ -15,7 +15,7 @@ var program = require('commander');
 var prompt = require('cli-prompt');
 
 program
-    .version(Package.version);
+    .version(Package.version, '-v, --version');
 
 program
     .command('keygen')
@@ -37,6 +37,16 @@ program
     .command('name <Name>')
     .description('set the display name for app')
     .action(Command.name);
+
+program
+    .command('versions [Type]')
+    .description('update the version name(bundle version short) or version code(bundle version)')
+    .option('-v, --value <code>', 'A user defined version number')
+    .option('-p, --plus [n]', 'An integer argument', parseInt, 1)
+    .option('-m, --main', 'To update the main version number')
+    .option('-n, --minor', 'To update the minor version number')
+    .option('-f, --fix', 'To update the fix version number')
+    .action(Command.version);
 
 program
     .command('link [PackageName]')

@@ -134,6 +134,12 @@ exports.getProjectName = function() {
     return pkg.name;
 };
 
+// 扩展JSON对象方法
+JSON.format = function(json) {
+    var format = require('json-format');
+    return format(json, {type: 'space', size: 4});
+};
+
 // JS包线上地址
 exports.bundleServer = {
     android: 'http://localhost:8081/index.android.bundle',

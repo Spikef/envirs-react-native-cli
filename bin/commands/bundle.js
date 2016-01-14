@@ -56,7 +56,7 @@ module.exports = function(Platform, options) {
             prompt.multi(
                 [{
                     label: 'Would you like to open the folder right now?',
-                    key: 'open', type: 'boolean'
+                    key: 'open', type: 'boolean', default: 'false'
                 }],
                 function(options){
                     if (options.open) {
@@ -88,7 +88,7 @@ module.exports = function(Platform, options) {
             prompt.multi(
                 [{
                     label: 'Would you like to open the folder right now?',
-                    key: 'open', type: 'boolean', default: false
+                    key: 'open', type: 'boolean', default: 'false'
                 }],
                 function(options){
                     if (options.open) {
